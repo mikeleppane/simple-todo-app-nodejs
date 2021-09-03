@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Simple Todo App CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "simple-todo-app-with-nodejs"
+          heroku_email: "mleppan23@gmail.com"
+          usedocker: true
+          docker_heroku_process_type: web
